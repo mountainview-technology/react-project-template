@@ -1,0 +1,11 @@
+.card {
+    width: 200px;
+    height: 100px;
+    box-shadow: 0 2px .25rem gray;
+    background-color: lightblue;
+    display: inline-flex;
+    margin: 5px;
+    &:hover{
+        background-color: lightskyblue;
+    }
+}

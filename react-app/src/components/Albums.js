@@ -2,6 +2,14 @@ import React, { useEffect } from "react"
 import { connect } from "react-redux";
 import {dataRequested} from '../states/Albums/reducer';
 import AlbumCard from './AlbumCard';
+import styled from 'styled-components';
+
+const AlbumsTitle = styled.h2`
+background-color: lightgray;
+box-shadow: 0 2px .25rem #B6B6B6;
+margin: 1.25rem .625rem 0;
+color: darkgreen
+`;
 
 const App = function({getData, albums, isLoading, error }) {
     useEffect(() => {
@@ -11,7 +19,7 @@ const App = function({getData, albums, isLoading, error }) {
 
     return (
         <>
-        <h2> Albumns</h2>
+        <AlbumsTitle> Albumns</AlbumsTitle>
             {
                 isLoading ? 
                 (<div>loading</div>) :
