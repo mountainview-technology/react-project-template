@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import {dataRequested} from '../states/Albums/reducer';
 import AlbumCard from './AlbumCard';
 import styled from 'styled-components';
+import { Link,Route } from 'react-router-dom';
+import Album from "./Album";
 
 const AlbumsTitle = styled.h2`
 background-color: lightgray;
@@ -11,7 +13,7 @@ margin: 1.25rem .625rem 0;
 color: darkgreen
 `;
 
-const App = function({getData, albums, isLoading, error }) {
+const App = function({getData, albums, isLoading, error, match }) {
     useEffect(() => {
         getData({url: "http://jsonplaceholder.typicode.com/posts"})
     }, []);
@@ -19,11 +21,11 @@ const App = function({getData, albums, isLoading, error }) {
 
     return (
         <>
-        <AlbumsTitle> Albumns</AlbumsTitle>
+            <AlbumsTitle> Albumns</AlbumsTitle>
             {
                 isLoading ? 
                 (<div>loading</div>) :
-                (albums.map(album => (<AlbumCard album={album}/>)))
+                (albums.map(album => (<Link key={`${match.url}/${album.id}`} to={`${match.url}/${album.id}`}><AlbumCard album={album} /></Link>)))
             }
         </>
     );

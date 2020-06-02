@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Error from './components/Error';
 import Navbar from './components/Navbar';
+import Album from './components/Album';
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
       <Switch>
         <Route path="/" component={Home} exact />
         <Route path="/posts" component={Posts} />
-        <Route path="/albums" component={Albums} />
+        <Route exact path="/albums" component={Albums} />
+        <Route exact path="/albums/:id" component={Album} />
         <Route component={Error} />
       </Switch>
       
