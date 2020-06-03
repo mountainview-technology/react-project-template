@@ -6,5 +6,6 @@ export default ()=>(
     <Link to="/">Home </Link>
     <Link to="/posts">Posts </Link>
     <Link to="/albums">Albums </Link>
+    <Link to="/category">Category</Link>
     </div>
 );

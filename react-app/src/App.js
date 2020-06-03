@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Error from './components/Error';
 import Navbar from './components/Navbar';
 import Album from './components/Album';
+import Category from './components/Category';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/posts" component={Posts} />
         <Route exact path="/albums" component={Albums} />
         <Route exact path="/albums/:id" component={Album} />
+        <Route path="/category" component={Category} />
         <Route component={Error} />
       </Switch>
       

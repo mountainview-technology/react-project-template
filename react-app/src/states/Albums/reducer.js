@@ -11,7 +11,7 @@ const albumSlice = createSlice({
     },
     reducers:{
         dataRequested: (state, action) => {
-            state.isLoading = true;
+            state.isLoading = true; 
         },
         albumsLoaded: (state, action) => {
             state.albums = action.payload;
