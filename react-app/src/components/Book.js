@@ -1,20 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Image, Item, Rating } from 'semantic-ui-react';
+
 
 const Book = ({book=undefined}) => {
     return (
         book ? 
         (
-            <div>
-                <img src={book.thumbnail} />
-                <div>
-                    <h3>{book.title}</h3>
-                    <div>{ book.author }</div>
-                    <div>{book.rating}</div>
-                    <div>{book.link}</div>
-                    <div>{book.introduction}</div>
-                </div>
-            </div>
+            <Item>
+            <Item.Image size='tiny' src={book.thumbnail} />
+            <Item.Content>
+                <Item.Header as='a'>{book.title}</Item.Header>
+                <Item.Meta>{book.author}</Item.Meta>
+                <Item.Meta>{book.rating}</Item.Meta>
+                <Rating defaultRating={book.rating/2} maxRating={5}></Rating>
+                <Item.Description>
+                    {book.introduction}
+                </Item.Description>
+                <Item.Extra>{book.link}</Item.Extra>
+            </Item.Content>
+            </Item>
+            
         ) :
         (
             <span>Error happend.</span>
@@ -26,7 +32,7 @@ Book.propTypes = {
     book: PropTypes.shape({
         title: PropTypes.string,
         author: PropTypes.string,
-        url: PropTypes.string,
+        link: PropTypes.string,
         thumbnail: PropTypes.string,
         introduction: PropTypes.string,
         rating: PropTypes.number

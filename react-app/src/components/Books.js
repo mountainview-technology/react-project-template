@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Book from './Book';
-
+import { Image, Item, Rating } from 'semantic-ui-react';
 const Component = ({books}) =>{
     return (
         <>
         <h3>Books</h3>
+        <Item.Group>
         {
-            books.map(book => (<Book book={book} />))
+            books.map(book => (<Book key={book.title} book={book} />))
         }
+        </Item.Group>
         </>
     );
 };
