@@ -7,6 +7,9 @@ import { Provider } from 'react-redux';
 import store from './states/store.js';
 import { BrowserRouter, Route, Link } from "react-router-dom";
 
+import { configureFakeBackend } from './utils';
+configureFakeBackend();
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
