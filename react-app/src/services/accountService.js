@@ -34,7 +34,7 @@ function login(email, password) {
 function logout() {
     localStorage.removeItem('user');
     userSubject.next(null);
-    history.push('/account/login');
+    // history.push('/account/login');
 }
 
 function register(params) {

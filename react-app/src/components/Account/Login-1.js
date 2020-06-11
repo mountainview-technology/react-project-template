@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Formik, Field, Form as FormikForm, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { alertService, accountService } from '../../services';
-import { connect } from 'react-redux';
-import { login as accountLogin,logout as accountLogout } from '../../states/Account/reducer';
 
-const App = ({history, location, login, logout, state})=>{
+const Login = ({history, location})=>{
 
-    useEffect(()=>{
-        logout();
-    },[])
     const initialValues = {
         email:'',
         password:''
@@ -25,17 +20,15 @@ const App = ({history, location, login, logout, state})=>{
 
     function onSubmit({email, password}, {setSubmitting}){
         alertService.clear();
-        login({email: email, password: password});
-
-        // accountService.login(email, password)
-        //     .then(()=>{
-        //         const {from} = location.state || {from: { pathname:"/"}};
-        //         history.push(from);
-        //     })
-        //     .catch(error =>{
-        //         setSubmitting(false);
-        //         alertService.error(error);
-        //     })
+        accountService.login(email, password)
+            .then(()=>{
+                const {from} = location.state || {from: { pathname:"/"}};
+                history.push(from);
+            })
+            .catch(error =>{
+                setSubmitting(false);
+                alertService.error(error);
+            })
     }
 
     return (
@@ -44,6 +37,10 @@ const App = ({history, location, login, logout, state})=>{
                 ({values,
                     errors, 
                     touched, 
+                    isSubmitting,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit
                 }) =>
                 {
                     const formContrlClassName = 'form-control ' + (errors.email && touched.email ? 'control-invalid':'')
@@ -63,8 +60,8 @@ const App = ({history, location, login, logout, state})=>{
                                 </div>
                                 <div className="form-row">
                                     <div className='form-group col'>
-                                        <button type='submit' disabled={state.isLoggingIn} className='btn btn-primary'>
-                                            {state.isLoggingIn && <span className="spinner-border spinner-border-sm mr-1"></span>}
+                                        <button type='submit' disabled={isSubmitting} className='btn btn-primary'>
+                                            {isSubmitting && <span className="spinner-border spinner-border-sm mr-1"></span>}
                                             Login
                                         </button>
                                         <Link to="register" className="btn btn-link">Register</Link>
@@ -84,14 +81,4 @@ const App = ({history, location, login, logout, state})=>{
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        state: state.account
-    }
-};
-
-const Login = connect(
-    mapStateToProps,
-    {login:accountLogin, logout:accountLogout}
-    )(App)
 export default Login;
